@@ -1,10 +1,4 @@
 Rails.application.routes.draw do
-  resources :orders
-
-  resources :line_items
-
-  resources :carts
-
   root to: 'store#index', as: 'store'
   get 'store/index'
 
@@ -13,6 +7,27 @@ Rails.application.routes.draw do
   end
 
   resources :products
+
+  get 'admin' => 'admin#index'
+
+  controller :sessions do
+    get 'login' => :new
+    post 'login' => :create
+    delete 'logout' => :destroy
+  end
+
+  
+  get 'sessions/create'
+
+  get 'sessions/destroy'
+
+  resources :users
+
+  resources :orders
+
+  resources :line_items
+
+  resources :carts
 
 
   # The priority is based upon order of creation: first created -> highest priority.
