@@ -1,24 +1,34 @@
-<% if notice %>
-<p id="notice"><%= notice %></p>
-<% end %>
-<!-- START_HIGHLIGHT -->
-<h1><%= t('.title_html') %></h1>
-<!-- END_HIGHLIGHT -->
-<% cache ['store', Product.latest] do %>
-  <% @products.each do |product| %>
-    <% cache ['entry', product] do %>
-      <div class="entry">
-        <%= image_tag(product.image_url) %>
-        <h3><%= product.title %></h3>
-        <%= sanitize(product.description) %>
-        <div class="price_line">
-          <span class="price"><%= number_to_currency(product.price) %></span>
-<!-- START_HIGHLIGHT -->
-          <%= button_to t('.add_html'), line_items_path(product_id: product),
-# END_HIGHLIGHT
-            remote: true %>
-        </div>
-      </div>
+<div class="container">
+  <h1><%= t('.title_html') %></h1>
+ <div class="container-fluid">
+<div class="row">
+<div class="col-md-10"> 
+
+
+  <div class="row">
+    <% cache ['store', Product.latest] do %>
+      <% @products.each do |product| %>
+        <% cache ['entry', product] do %>
+          <div class="col-sm-4 col-md-3">
+            <div class="thumbnail">
+              <%= image_tag(product.image_url) %>              
+              <h3><%= product.title %></h3>
+              <p><%= truncate(strip_tags(product.description), length: 80) %></p>
+              <p><b><%= number_to_currency(product.price) %></b></p>
+              <p><%= button_to t('.add_html'), line_items_path(product_id: product), remote: true, class:"btn btn-default" %></a> <a href="#" class="btn btn-default" role="button">Button</a></p>     
+            </div>
+          </div>
+        <% end %>
+      <% end %>
     <% end %>
-  <% end %>
-<% end %>
+  </div>
+</div>
+
+</div>
+</div>
+</div>
+
+
+
+
+
